@@ -141,6 +141,24 @@ sub clean_hosts {
     return 1;
 }
 
+# This function converts ldap time format into unixtime
+# 20120326121334 -> 1332756814
+# Return: converted unixtime
+sub conv2unix {
+    my ($self, $date) = @_;
+
+    my ($year, $mon, $day, $hour, $min, $sec) =
+        $date =~ /^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/;
+    # due to specific processes inside perl date library
+    # there are some adjustment required
+    $year -= 1900;
+    $mon  -= 1;
+    #####
+
+    my $unixtime = POSIX::mktime($sec, $min, $hour, $day, $mon, $year, 0, 0);
+    return $unixtime;
+}
+
 # This function is looking for last update in "acl_tree"
 # Return: last modify time. $latest_mod_time
 sub last_change {
@@ -175,27 +193,6 @@ sub last_change {
     }
 
     return ($latest_mod_time, $access_list);
-}
-
-# This function converts ldap time format into unixtime
-# 20120326121334 -> 1332756814
-# Return: converted unixtime
-sub conv2unix {
-    my ($self, $date) = @_;
-
-    my ($year, $mon, $day, $hour, $min, $sec) =
-        $date =~ /^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/;
-    # due to specific processes inside perl date library
-    # there are some adjustment required
-    $year -= 1900;
-    $mon  -= 1;
-    #####
-
-    my $unixtime = POSIX::mktime($sec, $min, $hour, $day, $mon, $year, 0, 0);
-    my $testtime = POSIX::mktime('52','21','19','19','03','113');
-    my $t1 = time();
-    my $t2 = localtime(time);
-    return $unixtime;
 }
 
 1;
