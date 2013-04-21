@@ -13,7 +13,8 @@ Source3:        https://raw.github.com/AndriiGrytsenko/ldap-acl-syncer/master/et
 Source4:        https://raw.github.com/AndriiGrytsenko/ldap-acl-syncer/master/docs/README.md
 Source5:        http://ftp.netbsd.org/pub/NetBSD/NetBSD-current/src/external/bsd/openldap/dist/contrib/slapd-modules/nssov/ldapns.schema
 Source6:        https://raw.github.com/AndriiGrytsenko/ldap-acl-syncer/master/docs/ldap-acl-syncer.spec
-Source7:        https://raw.github.com/AndriiGrytsenko/ldap-acl-syncer/master/crond./ldap-acl-syncer
+Source7:        https://raw.github.com/AndriiGrytsenko/ldap-acl-syncer/master/cron.d/ldap-acl-syncer
+Source8:        https://raw.github.com/AndriiGrytsenko/ldap-acl-syncer/master/docs/examples/ldap_structure.txt
 
 BuildArch:      noarch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -33,6 +34,7 @@ install -d -m755 $RPM_BUILD_ROOT/etc
 install -d -m755 $RPM_BUILD_ROOT/etc/cron.d
 install -d -m755 $RPM_BUILD_ROOT/usr/lib/%{name}
 install -d -m755 $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}
+install -d -m755 $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/examples
 
 install %{SOURCE0} $RPM_BUILD_ROOT/usr/bin/
 install %{SOURCE1} $RPM_BUILD_ROOT/usr/lib/%{name}/
@@ -42,6 +44,7 @@ install %{SOURCE4} $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/
 install %{SOURCE5} $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/
 install %{SOURCE6} $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/
 install %{SOURCE7} $RPM_BUILD_ROOT/etc/cron.d/
+install %{SOURCE8} $RPM_BUILD_ROOT/usr/share/doc/%{name}-%{version}/examples
 
 
 %clean
@@ -59,6 +62,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc /usr/share/doc/%{name}-%{version}/README.md 
 %doc /usr/share/doc/%{name}-%{version}/ldapns.schema 
 %doc /usr/share/doc/%{name}-%{version}/ldap-acl-syncer.spec
+%doc /usr/share/doc/%{name}-%{version}/examples/ldap_structure.txt
 
 %changelog
 * Thu Apr 19 2013 Andrii Grytsenko <andrii.grytsenko@gmail.com> 0.1-1

@@ -108,7 +108,7 @@ In order to build rpm package checkout from repository latest version of script 
 `git checkout git@github.com:AndriiGrytsenko/ldap-acl-syncer.git`
 
 if you have **spectools** you don't need to download sources manually, just run:    
-`cd $rpmbuild/SPECS && spectool -gf -C ../SOURCES/ openssh-ldap-publickey.spec`
+`cd $rpmbuild/SPECS && spectool -gf -C ../SOURCES/ ldap-acl-syncer.spec`
 
 then build RPM as usual:    
 `rpmbuild -ba ldap-acl-syncer.spec`
