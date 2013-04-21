@@ -18,6 +18,9 @@ sub new {
     return $self;
 }
 
+# This functions maps alphabetical log level names into digital
+# Storing result into $self->{'loglevel'}
+# Return: nothing.
 sub getLogLevel {
 	my ($self) = @_;
 
@@ -31,8 +34,12 @@ sub getLogLevel {
 	);
 
 	$self->{'loglevel'} = $loglevels{$loglevel_name};
+	return 1;
 }
 
+# This function accepts log messaage and log level
+# and puts it into log file.
+# Return: nothing
 sub writeToLog {
 	my ($self, $message, $loglevel) = @_;
 
@@ -42,5 +49,7 @@ sub writeToLog {
 		
 		print $fh "$time_shtamp: $message\n";
 	}
+
+	return 1;
 }
 1;

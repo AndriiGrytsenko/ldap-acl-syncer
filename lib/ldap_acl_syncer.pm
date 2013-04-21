@@ -16,7 +16,7 @@ sub new {
 }
 
 # This function is just a wrapper for error handeling
-# It transfer message to logging class and die
+# It transfers message to logging class and dies eventually
 sub error_handler {
     my ($self, $message) = @_;
 
@@ -24,8 +24,9 @@ sub error_handler {
     die $message;
 }
 
-# This function open ldap connection and 
-# return handler in $self->{'ldap_handler'}
+# This function opens ldap connection and 
+# puts LDAP connection handler into $self->{'ldap_handler'}
+# Return: nothing
 sub get_ldap_handler {
     my ($self) = @_;
 
@@ -47,9 +48,9 @@ sub close_ldap_connection {
     return 1;
 }
 
-# This function read "ou=acl,$base" tree
-# and store it into $result hash
-# Return hash $result with next structure:
+# This function reads "ou=acl,$base" tree
+# and stores it into $result hash
+# Return: hash $result with next structure:
 # $result->{access_list_name}->{'members'} - array of all acl's members
 # $result->{access_list_name}->{'hosts'}   - array of all acl's hosts
 sub get_acl_list {
@@ -109,7 +110,7 @@ sub applies_rules {
 
 # This function goes through all account in "people_tree"
 # and deletes all 'host' attibutes with '*.:g'
-# Return nothing
+# Return: nothing
 sub clean_hosts {
     my ($self) = @_;
 
@@ -141,7 +142,7 @@ sub clean_hosts {
 }
 
 # This function is looking for last update in "acl_tree"
-# Return last modify time. $latest_mod_time
+# Return: last modify time. $latest_mod_time
 sub last_change {
     my ($self) = @_;
     
@@ -178,13 +179,13 @@ sub last_change {
 
 # This function converts ldap time format into unixtime
 # 20120326121334 -> 1332756814
-# Return $unixtime
+# Return: converted unixtime
 sub conv2unix {
     my ($self, $date) = @_;
 
     my ($year, $mon, $day, $hour, $min, $sec) =
         $date =~ /^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/;
-    # due to specific works of perl date library
+    # due to specific processes inside perl date library
     # there are some adjustment required
     $year -= 1900;
     $mon  -= 1;
