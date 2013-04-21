@@ -55,6 +55,7 @@ acl_tree        => ou=ACL,dc=test,dc=com
 people_tree     => ou=People,dc=test,dc=com
 interval_time   => 120
 log_file        => /var/log/ldap-acl-syncer.log
+loglevel        => DEBUG
 ```
 
 where:   
@@ -64,7 +65,8 @@ where:
 **bind** = you username to connect to ldap(has to be with write permissions)   
 **acl_tree** = path to ACL tree 
 **people_tree** = path to People tree
-**interval_time** = depending of how often you going to run this script, set 60 if you are going to run it every minute by cron.
+**interval_time** = depending of how often you going to run this script, set 60 if you are going to run it every minute by cron.(interval_time = crontab_execution_frequency ).
+**loglevel** = the log level. Could be CRIT, ERR, WARN, INFO, DEBUG. 
 
 ####Cron installation####
 if you aren't going to use RPM package, then you are required to setup cron manually:    
