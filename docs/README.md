@@ -88,10 +88,19 @@ Host installation
 In addition to ldap authentication installation you need next rule to be added to **/etc/ldap.conf**:   
    
 it could be as easy as:   
-`pam_fileter |(host=andrii.prod.lan:*)(host=\*:*)`   
+```
+pam_fileter |(host=andrii.prod.lan:*)(host=\*:*)
+```
 and as complex as:    
-`pam_filter &(|(host=andrii.prod.lan:*)(host=\*:*))(!host=x\*:*)`
+```
+pam_filter &(objectclass=inetOrgPerson)(|(host=andrii.prod.lan:*)(host=\*.prod.lan:*)(host=\*:*))\
+(!(|(host=!andrii.prod.lan:*)(host=!\*.prod.lan:*)(host=!\*:*)))
+```
 
+where 
+**andrii.prod.lan** - current host
+**prod.lan** - current enviroment
+**\*** - all environments
 
 the last one allows all access for all users who have next value in ldap attibute **host**:   
 **andrii.lan:\***   
