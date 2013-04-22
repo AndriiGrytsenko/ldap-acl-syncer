@@ -1,6 +1,5 @@
 #!/usr/bin/perl
 
-# Written by Andrii Grytsenko 2012
 use strict;
 use Clone qw(clone);
 
