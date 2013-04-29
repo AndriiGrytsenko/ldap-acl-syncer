@@ -3,9 +3,8 @@
 use strict;
 use Clone qw(clone);
 
-use lib '/usr/lib/ldap-acl-syncer';
-use ldap_acl_syncer;
-use ldap_acl_syncer_logger;
+use ldap_acl_syncer::ldap_acl_syncer;
+use ldap_acl_syncer::ldap_acl_syncer_logger;
 
 # This function is goes through configuration file
 # and puts into hash called $conf
@@ -22,9 +21,9 @@ sub read_conf {
         # skip if empty line
         next if (/^\s*$/);
         # remove leading whitespace
-        $line =~ s/^\s+//;
+        $_ =~ s/^\s+//;
         # remove trailing whitespace
-        $line =~ s/\s+$//;
+        $_ =~ s/\s+$//;
 
         # delete all ' and "
         $_ =~ s/'//g;
